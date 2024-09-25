@@ -1,7 +1,7 @@
 package com.ust.wastewarden.routes.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -10,24 +10,21 @@ public class RouteRequest {
     private List<Agent> agents;
     private List<Job> jobs;
 
-    // Getters and Setters
-
     @Data
     public static class Agent {
-        private double[] start_location;
-        private double[] end_location;
-        private int pickup_capacity;
-
-        // Getters and Setters
+        @JsonProperty("start_location")
+        private double[] startLocation;
+        @JsonProperty("end_location")
+        private double[] endLocation;
+        @JsonProperty("pickup_capacity")
+        private int pickupCapacity;
     }
 
     @Data
     public static class Job {
         private double[] location;
         private int duration;
-        private int pickup_amount;
-
-        // Getters and Setters
+        @JsonProperty("pickup_amount")
+        private int pickupAmount;
     }
 }
-

@@ -1,7 +1,7 @@
 package com.ust.wastewarden.routes.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
-
 import java.util.List;
 
 @Data
@@ -10,15 +10,11 @@ public class RouteResponse {
     private Properties properties;
     private List<Feature> features;
 
-    // Getters and Setters
-
     @Data
     public static class Properties {
         private String mode;
         private Params params;
         private Issues issues;
-
-        // Getters and Setters
 
         @Data
         public static class Params {
@@ -26,32 +22,29 @@ public class RouteResponse {
             private List<Agent> agents;
             private List<Job> jobs;
 
-            // Getters and Setters
-
             @Data
             public static class Agent {
-                private double[] start_location;
-                private double[] end_location;
-                private int pickup_capacity;
-
-                // Getters and Setters
+                @JsonProperty("start_location")
+                private double[] startLocation;
+                @JsonProperty("end_location")
+                private double[] endLocation;
+                @JsonProperty("pickup_capacity")
+                private int pickupCapacity;
             }
 
             @Data
             public static class Job {
                 private double[] location;
                 private int duration;
-                private int pickup_amount;
-
-                // Getters and Setters
+                @JsonProperty("pickup_amount")
+                private int pickupAmount;
             }
         }
 
         @Data
         public static class Issues {
-            private List<Integer> unassigned_agents;
-
-            // Getters and Setters
+            @JsonProperty("unassigned_agents")
+            private List<Integer> unassignedAgents;
         }
     }
 
@@ -61,45 +54,47 @@ public class RouteResponse {
         private String type;
         private FeatureProperties properties;
 
-        // Getters and Setters
-
+        @Data
         public static class Geometry {
             private String type;
             private List<List<double[]>> coordinates;
-
-            // Getters and Setters
         }
 
+        @Data
         public static class FeatureProperties {
-            private int agent_index;
+            @JsonProperty("agent_index")
+            private int agentIndex;
             private int time;
-            private int start_time;
-            private int end_time;
+            @JsonProperty("start_time")
+            private int startTime;
+            @JsonProperty("end_time")
+            private int endTime;
             private int distance;
             private List<Leg> legs;
             private String mode;
             private List<Action> actions;
 
-            // Getters and Setters
-
+            @Data
             public static class Leg {
                 private int time;
                 private int distance;
-                private int from_waypoint_index;
-                private int to_waypoint_index;
-
-                // Getters and Setters
+                @JsonProperty("from_waypoint_index")
+                private int fromWaypointIndex;
+                @JsonProperty("to_waypoint_index")
+                private int toWaypointIndex;
             }
 
+            @Data
             public static class Action {
                 private int index;
                 private String type;
-                private int start_time;
+                @JsonProperty("start_time")
+                private int startTime;
                 private int duration;
-                private int job_index;
-                private int waypoint_index;
-
-                // Getters and Setters
+                @JsonProperty("job_index")
+                private int jobIndex;
+                @JsonProperty("waypoint_index")
+                private int waypointIndex;
             }
         }
     }
