@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.net.ssl.SSLException;
 import java.util.List;
 
 @RestController
@@ -80,7 +81,7 @@ public class RouteController {
     private RoutePlannerService routePlannerService;
 
     @PostMapping("/optimize")
-    public ResponseEntity<RouteResponse> optimizeRoutes(@RequestBody RouteRequest request) {
+    public ResponseEntity<RouteResponse> optimizeRoutes(@RequestBody RouteRequest request) throws Exception {
         // Call service to optimize the routes using Geoapify API
         RouteResponse response = routePlannerService.getOptimizedRoute(request);
         return ResponseEntity.ok(response);
