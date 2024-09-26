@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
 @Table(name = "work_trucks")
@@ -43,7 +42,10 @@ public class Truck {
 //    private List<Route> routes;
 
 //    like one truck allowed for only one route (ONE to ONE)
-    private Long routeId;
+//    private Long routeId;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private Route assignedRoute; // Store the assigned route
 }
 
 //Table work_trucks {

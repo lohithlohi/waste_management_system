@@ -1,6 +1,8 @@
 package com.ust.wastewarden.truck.controller;
 
+import com.ust.wastewarden.truck.model.RouteResponse;
 import com.ust.wastewarden.truck.model.Truck;
+import com.ust.wastewarden.truck.model.TruckStatusUpdateRequest;
 import com.ust.wastewarden.truck.service.TruckService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -59,5 +61,14 @@ public class TruckController {
     public ResponseEntity<Void> deleteTruck(@PathVariable Long id) {
         truckService.deleteTruck(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/assign-route")
+    public void assignRouteToTruck(@RequestBody RouteResponse routeResponse) {
+        truckService.assignRoute(routeResponse);
+    }
+
+    public void updateTruckStatus(@RequestBody TruckStatusUpdateRequest statusUpdateRequest) {
+        truckService.updateTruckStatus(statusUpdateRequest);
     }
 }

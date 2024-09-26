@@ -73,7 +73,10 @@ public class RouteService {
         // Step 3: Call the RoutePlannerService for optimized routes
         RouteResponse optimizedRoute = routePlannerService.getOptimizedRoute(routeRequest);
 
-        // Step 4: Notify trucks about their assigned routes
+        // Step 4: Send the optimized routes to the Truck Microservice
+        truckFeignClient.assignRouteToTruck(optimizedRoute);
+
+        // Step 5: Notify the trucks via Notification Microservice
         notificationFeignClient.notifyTrucks(optimizedRoute);
     }
 

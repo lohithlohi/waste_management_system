@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NotificationService {
@@ -64,4 +65,39 @@ public class NotificationService {
     public List<Notification> getUnreadNotifications(Long userId) {
         return notificationRepository.findByUserIdAndStatus(userId, NotificationStatus.UNREAD);
     }
+
+    // Create
+    public Notification createNotification(Notification notification) {
+        return notificationRepository.save(notification);
+    }
+
+    // Read All
+    public List<Notification> getAllNotifications() {
+        return notificationRepository.findAll();
+    }
+
+    // Read by ID
+    public Optional<Notification> getNotificationById(Long id) {
+        return notificationRepository.findById(id);
+    }
+
+    // Update
+    public Notification updateNotification(Long id, Notification notificationDetails) {
+        Notification notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Notification not found with id " + id));
+
+        notification.setMessage(notificationDetails.getMessage());
+        notification.setStatus(notificationDetails.getStatus());
+        notification.setCreatedAt(notificationDetails.getCreatedAt()); // or set it to now if updating time
+
+        return notificationRepository.save(notification);
+    }
+
+    // Delete
+    public void deleteNotification(Long id) {
+        Notification notification = notificationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Notification not found with id " + id));
+        notificationRepository.delete(notification);
+    }
+
 }
