@@ -1,10 +1,10 @@
 package com.ust.wastewarden.truck.controller;
 
+import com.ust.wastewarden.truck.model.Route;
 import com.ust.wastewarden.truck.model.RouteResponse;
 import com.ust.wastewarden.truck.model.Truck;
 import com.ust.wastewarden.truck.model.TruckStatusUpdateRequest;
 import com.ust.wastewarden.truck.service.TruckService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -70,5 +70,10 @@ public class TruckController {
 
     public void updateTruckStatus(@RequestBody TruckStatusUpdateRequest statusUpdateRequest) {
         truckService.updateTruckStatus(statusUpdateRequest);
+    }
+
+    @GetMapping("/{truckId}/routes")
+    public Route getTruckRoutes(@PathVariable Long truckId) {
+        return truckService.getTruckRouteByTruckId(truckId);
     }
 }

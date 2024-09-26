@@ -3,7 +3,6 @@ package com.ust.wastewarden.truck.service;
 import com.ust.wastewarden.truck.model.*;
 import com.ust.wastewarden.truck.repository.RouteRepository;
 import com.ust.wastewarden.truck.repository.TruckRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -105,5 +104,11 @@ public class TruckService {
         Truck truck = getTruckById(id);
         truck.setStatus(status);
         return truckRepository.save(truck);
+    }
+
+    public Route getTruckRouteByTruckId(Long truckId) {
+        Truck truck = truckRepository.findById(truckId).orElse(null);
+//                .orElseThrow(() -> new ResourceNotFoundException("Truck not found"));
+        return truck.getAssignedRoute();  // Assuming the route is stored as part of the truck entity
     }
 }
