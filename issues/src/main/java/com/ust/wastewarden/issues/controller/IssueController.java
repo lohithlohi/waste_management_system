@@ -15,14 +15,14 @@ public class IssueController {
         this.issueService = issueService;
     }
 
-    @PostMapping("/report")
-    public ResponseEntity<Issue> reportIssue(
-            @RequestParam Long userId,
-            @RequestParam Long binId,
-            @RequestParam String description) {
-        Issue issue = issueService.reportIssue(userId, binId, description);
-        return ResponseEntity.ok(issue);
-    }
+//    @PostMapping("/report")
+//    public ResponseEntity<Issue> reportIssue(
+//            @RequestParam Long userId,
+//            @RequestParam Long binId,
+//            @RequestParam String description) {
+//        Issue issue = issueService.reportIssue(userId, binId, description);
+//        return ResponseEntity.ok(issue);
+//    }
 
     @PutMapping("/{issueId}/resolve")
     public ResponseEntity<Issue> resolveIssue(@PathVariable Long issueId) {

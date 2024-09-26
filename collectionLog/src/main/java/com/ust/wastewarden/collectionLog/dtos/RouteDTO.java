@@ -9,7 +9,6 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 // corrections needed
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record RouteDTO(
         Long id,

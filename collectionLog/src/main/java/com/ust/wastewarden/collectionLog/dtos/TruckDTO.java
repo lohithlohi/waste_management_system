@@ -6,7 +6,6 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 
-@Getter
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record TruckDTO(
         Long id,

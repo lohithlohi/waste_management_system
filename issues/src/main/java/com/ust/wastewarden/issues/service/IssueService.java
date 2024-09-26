@@ -19,27 +19,28 @@ public class IssueService {
         this.issueRepository = issueRepository;
     }
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
     // Raise a new issue
-    public Issue reportIssue(Long userId, Long binId, String description) {
-        // Check if the bin exists via Bin Service
-        String binServiceUrl = "http://bin-service/bins/" + binId;
-        ResponseEntity<BinDTO> response = restTemplate.getForEntity(binServiceUrl, BinDTO.class);
-        if (!response.hasBody()) {
-            throw new RuntimeException("Bin not found");
-        }
+//    public Issue reportIssue(Long userId, Long binId, String description) {
+//        // Check if the bin exists via Bin Service
+//        String binServiceUrl = "http://bin-service/bins/" + binId;
+//        ResponseEntity<BinDTO> response = restTemplate.getForEntity(binServiceUrl, BinDTO.class);
+//        if (!response.hasBody()) {
+//            throw new RuntimeException("Bin not found");
+//        }
+//
+//        Issue issue = new Issue();
+//        issue.setUserId(userId);
+//        issue.setBinId(binId);
+//        issue.setDescription(description);
+//        issue.setStatus(IssueStatus.REPORTED);
+//        issue.setReportedAt(LocalDateTime.now());
+//
+//        return issueRepository.save(issue);
+//    }
 
-        Issue issue = new Issue();
-        issue.setUserId(userId);
-        issue.setBinId(binId);
-        issue.setDescription(description);
-        issue.setStatus(IssueStatus.REPORTED);
-        issue.setReportedAt(LocalDateTime.now());
-        
-        return issueRepository.save(issue);
-    }
 
     // Resolve an issue
     // resolving work given to Admin to check the reported bin -> sets to "overflow" status

@@ -11,6 +11,7 @@
         <module name="bin" />
         <module name="truck" />
         <module name="collectionLog" />
+        <module name="Discovery-Service" />
         <module name="issues" />
         <module name="users" />
         <module name="notifications" />
@@ -19,6 +20,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Discovery-Service" options="-parameters" />
       <module name="bin" options="-parameters" />
       <module name="collectionLog" options="-parameters" />
       <module name="issues" options="-parameters" />

@@ -18,12 +18,12 @@ public class CollectionLogController {
         this.collectionLogService = collectionLogService;
     }
 
-    @PostMapping("/collect")
-    public ResponseEntity<CollectionLog> logCollection(
-            @RequestParam Long binId, 
-            @RequestParam Long truckId, 
-            @RequestParam Long routeId) {
-        CollectionLog log = collectionLogService.logCollection(binId, truckId, routeId);
-        return ResponseEntity.ok(log);
-    }
+//    @PostMapping("/collect")
+//    public ResponseEntity<CollectionLog> logCollection(
+//            @RequestParam Long binId,
+//            @RequestParam Long truckId,
+//            @RequestParam Long routeId) {
+//        CollectionLog log = collectionLogService.logCollection(binId, truckId, routeId);
+//        return ResponseEntity.ok(log);
+//    }
 }

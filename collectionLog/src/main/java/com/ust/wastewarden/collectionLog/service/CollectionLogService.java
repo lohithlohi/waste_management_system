@@ -20,27 +20,27 @@ public class CollectionLogService {
         this.collectionLogRepository = collectionLogRepository;
     }
 
-    @Autowired
-    private RestTemplate restTemplate;
+//    @Autowired
+//    private RestTemplate restTemplate;
 
 
     // Log a collection activity
-    public CollectionLog logCollection(Long binId, Long truckId, Long routeId) {
-        // Check if the bin, truck, and route exist via respective services
-        String binServiceUrl = "http://bin-service/bins/" + binId;
-        String truckServiceUrl = "http://truck-service/trucks/" + truckId;
-        String routeServiceUrl = "http://route-service/routes/" + routeId;
-
-        restTemplate.getForEntity(binServiceUrl, BinDTO.class);
-        restTemplate.getForEntity(truckServiceUrl, TruckDTO.class);
-        restTemplate.getForEntity(routeServiceUrl, RouteDTO.class);
-
-        CollectionLog log = new CollectionLog();
-        log.setBinId(binId);
-        log.setTruckId(truckId);
-        log.setRouteId(routeId);
-        log.setCollectedAt(LocalDateTime.now());
-
-        return collectionLogRepository.save(log);
-    }
+//    public CollectionLog logCollection(Long binId, Long truckId, Long routeId) {
+//        // Check if the bin, truck, and route exist via respective services
+//        String binServiceUrl = "http://bin-service/bins/" + binId;
+//        String truckServiceUrl = "http://truck-service/trucks/" + truckId;
+//        String routeServiceUrl = "http://route-service/routes/" + routeId;
+//
+//        restTemplate.getForEntity(binServiceUrl, BinDTO.class);
+//        restTemplate.getForEntity(truckServiceUrl, TruckDTO.class);
+//        restTemplate.getForEntity(routeServiceUrl, RouteDTO.class);
+//
+//        CollectionLog log = new CollectionLog();
+//        log.setBinId(binId);
+//        log.setTruckId(truckId);
+//        log.setRouteId(routeId);
+//        log.setCollectedAt(LocalDateTime.now());
+//
+//        return collectionLogRepository.save(log);
+//    }
 }

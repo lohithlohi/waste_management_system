@@ -11,6 +11,7 @@
         <option value="$PROJECT_DIR$/notifications/pom.xml" />
         <option value="$PROJECT_DIR$/collectionLog/pom.xml" />
         <option value="$PROJECT_DIR$/issues/pom.xml" />
+        <option value="$PROJECT_DIR$/Discovery-Service/pom.xml" />
       </list>
     </option>
   </component>
