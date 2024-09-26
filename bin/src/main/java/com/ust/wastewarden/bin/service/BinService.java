@@ -1,5 +1,6 @@
 package com.ust.wastewarden.bin.service;
 
+import com.ust.wastewarden.bin.feignClients.RouteFeignClient;
 import com.ust.wastewarden.bin.model.Bin;
 import com.ust.wastewarden.bin.model.BinStatus;
 import com.ust.wastewarden.bin.repository.BinRepository;
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -14,8 +16,10 @@ import java.util.Random;
 public class BinService {
 
     private final BinRepository binRepository;
-    public BinService(BinRepository binRepository) {
+    private final RouteFeignClient routeFeignClient;
+    public BinService(BinRepository binRepository, RouteFeignClient routeFeignClient) {
         this.binRepository = binRepository;
+        this.routeFeignClient = routeFeignClient;
     }
 
     private Random random = new Random();
@@ -37,6 +41,10 @@ public class BinService {
         binRepository.deleteById(id);
     }
 
+    // Fetch bins with both FULL and OVERFLOW statuses
+    public List<Bin> getFullAndOverflowingBins() {
+        return binRepository.findByStatusIn(Arrays.asList("FULL", "OVERFLOW"));
+    }
 
     private static final int MAX_FILL_LEVEL = 100;
     private static final int MIN_FILL_LEVEL = 0;
@@ -75,5 +83,14 @@ public class BinService {
         // Increment base fill level to simulate increasing fill over time
         currentBaseFillLevel = Math.min(currentBaseFillLevel + INCREMENT_STEP, MAX_FILL_LEVEL);
     }
+
+    // Find bins with full or overflow status and send them as jobs
+    public void findAndAssignJobs() {
+        List<Bin> fullAndOverflowingBins = getFullAndOverflowingBins();
+        if (!fullAndOverflowingBins.isEmpty()) {
+            routeFeignClient.assignJobs(fullAndOverflowingBins); // Notify the Route Planner Service
+        }
+    }
 }
+
 

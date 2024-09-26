@@ -99,3 +99,86 @@ public class RouteResponse {
         }
     }
 }
+
+
+
+/*
+
+Record Version of Data Model
+package com.ust.wastewarden.routes.model;
+
+import java.util.List;
+
+public record RouteResponse(
+        String type,
+        Properties properties,
+        List<Feature> features
+) {
+    public record Properties(
+            String mode,
+            Params params,
+            Issues issues
+    ) {
+        public record Params(
+                String mode,
+                List<Agent> agents,
+                List<Job> jobs
+        ) {
+            public record Agent(
+                    double[] startLocation,
+                    double[] endLocation,
+                    int pickupCapacity
+            ) {}
+
+            public record Job(
+                    double[] location,
+                    int duration,
+                    int pickupAmount
+            ) {}
+        }
+
+        public record Issues(
+                List<Integer> unassignedAgents
+        ) {}
+    }
+
+    public record Feature(
+            Geometry geometry,
+            String type,
+            FeatureProperties properties
+    ) {
+        public record Geometry(
+                String type,
+                List<List<double[]>> coordinates
+        ) {}
+
+        public record FeatureProperties(
+                int agentIndex,
+                int time,
+                int startTime,
+                int endTime,
+                int distance,
+                List<Leg> legs,
+                String mode,
+                List<Action> actions
+        ) {
+            public record Leg(
+                    int time,
+                    int distance,
+                    int fromWaypointIndex,
+                    int toWaypointIndex
+            ) {}
+
+            public record Action(
+                    int index,
+                    String type,
+                    int startTime,
+                    int duration,
+                    int jobIndex,
+                    int waypointIndex
+            ) {}
+        }
+    }
+}
+
+ */

@@ -28,3 +28,32 @@ public class RouteRequest {
         private int pickupAmount;
     }
 }
+
+
+
+/*
+Record Version of Data Model
+
+package com.ust.wastewarden.routes.model;
+
+import java.util.List;
+
+public record RouteRequest(
+        String mode,
+        List<Agent> agents,
+        List<Job> jobs
+) {
+    public record Agent(
+            double[] startLocation,
+            double[] endLocation,
+            int pickupCapacity
+    ) {}
+
+    public record Job(
+            double[] location,
+            int duration,
+            int pickupAmount
+    ) {}
+}
+
+ */

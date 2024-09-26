@@ -1,9 +1,6 @@
 package com.ust.wastewarden.routes.controller;
 
-import com.ust.wastewarden.routes.model.Route;
-import com.ust.wastewarden.routes.model.RouteData;
-import com.ust.wastewarden.routes.model.RouteRequest;
-import com.ust.wastewarden.routes.model.RouteResponse;
+import com.ust.wastewarden.routes.model.*;
 import com.ust.wastewarden.routes.service.RoutePlannerService;
 import com.ust.wastewarden.routes.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,6 +82,11 @@ public class RouteController {
         // Call service to optimize the routes using Geoapify API
         RouteResponse response = routePlannerService.getOptimizedRoute(request);
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/jobs")
+    public void assignJobs(@RequestBody List<Bin> bins) throws Exception {
+        routeService.assignRoutes(bins);
     }
 
     @GetMapping("/hello")

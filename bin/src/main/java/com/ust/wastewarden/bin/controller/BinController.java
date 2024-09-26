@@ -1,5 +1,6 @@
 package com.ust.wastewarden.bin.controller;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.RequestParam;
 import com.ust.wastewarden.bin.model.Bin;
 import com.ust.wastewarden.bin.service.BinService;
@@ -64,6 +65,11 @@ public class BinController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @Scheduled(cron = "0 0 * * * *")  // Runs every hour
+    public void checkAndAssignJobs() {
+        binService.findAndAssignJobs();
     }
 }
 
