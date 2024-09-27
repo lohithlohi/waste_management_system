@@ -40,6 +40,12 @@ public class BinController {
         return ResponseEntity.ok(savedBin);
     }
 
+    @PostMapping("/saveall")
+    public ResponseEntity<List<Bin>> saveBin(@RequestBody List<Bin> bins) {
+        List<Bin> savedBins = binService.saveAllBins(bins);
+        return ResponseEntity.ok(savedBins);
+    }
+
 //    bin/{id}?fillLevel=X
     @PutMapping("/{id}")
     public ResponseEntity<Bin> updateBinStatus(@PathVariable Long id, @RequestParam int fillLevel) {
@@ -67,7 +73,17 @@ public class BinController {
         }
     }
 
-    @Scheduled(cron = "0 0 * * * *")  // Runs every hour
+    @GetMapping("/full-overflowing")
+    public ResponseEntity<List<Bin>> getFullOrOverflowingBins(){
+        List<Bin> fullAndOverflowingBins = binService.getFullAndOverflowingBins();
+        if (fullAndOverflowingBins != null) {
+            return ResponseEntity.ok(fullAndOverflowingBins);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @Scheduled(cron = "0/40 * * * * *")  // Runs every 3 min
     public void checkAndAssignJobs() {
         binService.findAndAssignJobs();
     }

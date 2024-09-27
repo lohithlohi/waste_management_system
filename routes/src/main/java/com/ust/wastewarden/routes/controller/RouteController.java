@@ -85,8 +85,8 @@ public class RouteController {
     }
 
     @PostMapping("/jobs")
-    public void assignJobs(@RequestBody List<Bin> bins) throws Exception {
-        routeService.assignRoutes(bins);
+    public ResponseEntity<RouteResponse> assignJobs(@RequestBody List<Bin> bins) throws Exception {
+        return ResponseEntity.ok(routeService.assignRoutes(bins));
     }
 
     @GetMapping("/hello")

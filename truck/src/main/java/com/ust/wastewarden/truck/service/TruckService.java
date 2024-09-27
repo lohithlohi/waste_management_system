@@ -91,6 +91,10 @@ public class TruckService {
         return truckRepository.save(truck);
     }
 
+    public List<Truck> saveAllTrucks(List<Truck> trucks){
+        return truckRepository.saveAll(trucks);
+    }
+
     public void deleteTruck(Long id) {
         truckRepository.deleteById(id);
     }

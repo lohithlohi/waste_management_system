@@ -7,6 +7,7 @@ import com.ust.wastewarden.bin.repository.BinRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +28,10 @@ public class BinService {
 
     public List<Bin> getAllBins() {
         return binRepository.findAll();
+    }
+
+    public List<Bin> saveAllBins(List<Bin> bins){
+        return binRepository.saveAll(bins);
     }
 
     public Bin getBinById(Long id) {
@@ -71,7 +76,7 @@ public class BinService {
         return null;
     }
 
-    @Scheduled(cron = "0/20 * * * * *")
+    @Scheduled(cron = "0/55 * * * * *")
     public void simulateSensorUpdates() {
         List<Bin> bins = getAllBins();
         bins.forEach(bin -> {
@@ -85,6 +90,7 @@ public class BinService {
     }
 
     // Find bins with full or overflow status and send them as jobs
+//    @Scheduled(cron = "0 * * * * *")
     public void findAndAssignJobs() {
         List<Bin> fullAndOverflowingBins = getFullAndOverflowingBins();
         if (!fullAndOverflowingBins.isEmpty()) {

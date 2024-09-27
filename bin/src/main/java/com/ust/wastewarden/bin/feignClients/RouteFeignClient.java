@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
-@FeignClient(name = "TRUCK")
+@FeignClient(name = "ROUTES")
 public interface RouteFeignClient {
 
     @PostMapping("/routes/jobs")

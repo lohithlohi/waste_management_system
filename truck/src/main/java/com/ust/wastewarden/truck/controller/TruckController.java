@@ -46,6 +46,12 @@ public class TruckController {
         return ResponseEntity.ok(savedTruck);
     }
 
+    @PostMapping("/saveall")
+    public ResponseEntity<List<Truck>> saveBin(@RequestBody List<Truck> trucks) {
+        List<Truck> savedTrucks = truckService.saveAllTrucks(trucks);
+        return ResponseEntity.ok(savedTrucks);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Truck> updateTruck(@PathVariable Long id, @RequestBody Truck truck) {
         truck.setId(id);

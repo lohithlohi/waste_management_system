@@ -2,7 +2,7 @@ package com.ust.wastewarden.routes.service;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ust.wastewarden.routes.feignClients.NotificationFeignClient;
+//import com.ust.wastewarden.routes.feignClients.NotificationFeignClient;
 import com.ust.wastewarden.routes.feignClients.TruckFeignClient;
 import com.ust.wastewarden.routes.model.*;
 import com.ust.wastewarden.routes.repository.RouteRepository;
@@ -15,12 +15,12 @@ import java.util.stream.Collectors;
 public class RouteService {
 
     private final TruckFeignClient truckFeignClient;
-    private final NotificationFeignClient notificationFeignClient;
+//    private final NotificationFeignClient notificationFeignClient;
     private final RoutePlannerService routePlannerService;
     private final RouteRepository routeRepository;
-    public RouteService(TruckFeignClient truckFeignClient, NotificationFeignClient notificationFeignClient, RoutePlannerService routePlannerService, RouteRepository routeRepository) {
+    public RouteService(TruckFeignClient truckFeignClient, RoutePlannerService routePlannerService, RouteRepository routeRepository) {
         this.truckFeignClient = truckFeignClient;
-        this.notificationFeignClient = notificationFeignClient;
+//        this.notificationFeignClient = notificationFeignClient;
         this.routePlannerService = routePlannerService;
         this.routeRepository = routeRepository;
     }
@@ -63,7 +63,7 @@ public class RouteService {
 //    }
 
     // Assign routes based on bins (jobs) and available trucks (agents)
-    public void assignRoutes(List<Bin> bins) throws Exception {
+    public RouteResponse assignRoutes(List<Bin> bins) throws Exception {
         // Step 1: Fetch available trucks
         List<Truck> trucks = truckFeignClient.getAvailableTrucks();
 
@@ -76,8 +76,10 @@ public class RouteService {
         // Step 4: Send the optimized routes to the Truck Microservice
         truckFeignClient.assignRouteToTruck(optimizedRoute);
 
+        return optimizedRoute;
+
         // Step 5: Notify the trucks via Notification Microservice
-        notificationFeignClient.notifyTrucks(optimizedRoute);
+//        notificationFeignClient.notifyTrucks(optimizedRoute);
     }
 
     // Build the RouteRequest based on the bins and trucks data

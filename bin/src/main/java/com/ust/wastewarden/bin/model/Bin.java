@@ -23,6 +23,8 @@ public class Bin {
     private Double latitude;
     private Double longitude;
 
+    private int wasteAmount;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private BinStatus status;
