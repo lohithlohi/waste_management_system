@@ -9,9 +9,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
         import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/bins")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BinController {
 
     private final BinService binService;
@@ -44,6 +46,11 @@ public class BinController {
     public ResponseEntity<List<Bin>> saveBin(@RequestBody List<Bin> bins) {
         List<Bin> savedBins = binService.saveAllBins(bins);
         return ResponseEntity.ok(savedBins);
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin , @PathVariable Long id) {
+        return ResponseEntity.ok(binService.updateBins(bin,id));
     }
 
 //    bin/{id}?fillLevel=X

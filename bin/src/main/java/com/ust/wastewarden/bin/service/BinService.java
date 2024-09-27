@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -25,6 +26,20 @@ public class BinService {
 
     private Random random = new Random();
 
+    public Bin updateBins(Bin bin , Long id) {
+        Optional<Bin> optionalBin = binRepository.findById(id);
+        if(optionalBin.isPresent()) {
+            Bin foundedbin = optionalBin.get();
+            foundedbin.setLocation(bin.getLocation());
+            foundedbin.setLatitude(bin.getLatitude());
+            foundedbin.setLongitude(bin.getLongitude());
+            foundedbin.setWasteAmount(bin.getWasteAmount());
+            foundedbin.setStatus(bin.getStatus());
+            foundedbin.setFillLevel(bin.getFillLevel());
+            return  binRepository.save(foundedbin);
+        }
+        throw  new RuntimeException("User not found");
+    }
 
     public List<Bin> getAllBins() {
         return binRepository.findAll();
