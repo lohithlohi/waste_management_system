@@ -83,7 +83,8 @@ public class BinController {
         }
     }
 
-    @Scheduled(cron = "0/40 * * * * *")  // Runs every 3 min
+//    @Scheduled(cron = "0/40 * * * * *")  // Runs every 3 min
+    @GetMapping("/assign-bins")
     public void checkAndAssignJobs() {
         binService.findAndAssignJobs();
     }

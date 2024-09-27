@@ -76,7 +76,7 @@ public class BinService {
         return null;
     }
 
-    @Scheduled(cron = "0/55 * * * * *")
+//    @Scheduled(cron = "0/55 * * * * *")
     public void simulateSensorUpdates() {
         List<Bin> bins = getAllBins();
         bins.forEach(bin -> {
