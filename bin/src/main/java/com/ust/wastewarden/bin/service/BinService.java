@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -49,6 +50,21 @@ public class BinService {
     // Fetch bins with both FULL and OVERFLOW statuses
     public List<Bin> getFullAndOverflowingBins() {
         return binRepository.findByStatusIn(Arrays.asList("FULL", "OVERFLOW"));
+    }
+
+    public Bin updateBins(Bin bin , Long id) {
+        Optional<Bin> optionalBin = binRepository.findById(id);
+        if(optionalBin.isPresent()) {
+            Bin foundedbin = optionalBin.get();
+            foundedbin.setLocation(bin.getLocation());
+            foundedbin.setLatitude(bin.getLatitude());
+            foundedbin.setLongitude(bin.getLongitude());
+            foundedbin.setWasteAmount(bin.getWasteAmount());
+            foundedbin.setStatus(bin.getStatus());
+            foundedbin.setFillLevel(bin.getFillLevel());
+            return  binRepository.save(foundedbin);
+        }
+        throw  new RuntimeException("User not found");
     }
 
     private static final int MAX_FILL_LEVEL = 100;

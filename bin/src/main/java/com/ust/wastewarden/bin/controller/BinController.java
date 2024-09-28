@@ -46,6 +46,11 @@ public class BinController {
         return ResponseEntity.ok(savedBins);
     }
 
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Bin> updateBin(@RequestBody Bin bin , @PathVariable Long id) {
+        return ResponseEntity.ok(binService.updateBins(bin,id));
+    }
+
 //    bin/{id}?fillLevel=X
     @PutMapping("/{id}")
     public ResponseEntity<Bin> updateBinStatus(@PathVariable Long id, @RequestParam int fillLevel) {
