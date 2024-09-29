@@ -10,4 +10,6 @@ import java.util.List;
 @Repository
 public interface TruckRepository extends JpaRepository<Truck, Long> {
     List<Truck> findByStatus(TruckStatus status);
+    List<Truck> findByAssignedRouteNotNull();
+    Truck findByIdAndAssignedRouteNotNull(Long id);
 }

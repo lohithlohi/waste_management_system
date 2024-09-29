@@ -6,9 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
+@Table(name = "route_actions")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class RouteAction {
 
     @Id
@@ -21,6 +22,4 @@ public class RouteAction {
     private int duration;
     private int jobIndex;
     private int waypointIndex;
-
-    // Getters and setters
 }

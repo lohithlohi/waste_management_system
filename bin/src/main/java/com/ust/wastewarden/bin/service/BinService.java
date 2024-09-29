@@ -49,7 +49,7 @@ public class BinService {
 
     // Fetch bins with both FULL and OVERFLOW statuses
     public List<Bin> getFullAndOverflowingBins() {
-        return binRepository.findByStatusIn(Arrays.asList("FULL", "OVERFLOW"));
+        return binRepository.findByStatusIn(Arrays.asList("FULL", "OVERFLOWING"));
     }
 
     public Bin updateBins(Bin bin , Long id) {

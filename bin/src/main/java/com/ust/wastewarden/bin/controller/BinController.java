@@ -41,7 +41,7 @@ public class BinController {
     }
 
     @PostMapping("/saveall")
-    public ResponseEntity<List<Bin>> saveBin(@RequestBody List<Bin> bins) {
+    public ResponseEntity<List<Bin>> saveallBin(@RequestBody List<Bin> bins) {
         List<Bin> savedBins = binService.saveAllBins(bins);
         return ResponseEntity.ok(savedBins);
     }

@@ -8,9 +8,10 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Entity
+@Table(name = "routes")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Route {
 
     @Id
@@ -18,14 +19,17 @@ public class Route {
     private Long id;
 
     private String type;
-    private String geometry; // This can be serialized as JSON for storing coordinates
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String geometry; // Store serialized geometry data (coordinates in JSON)
+
     private int distance;
     private int startTime;
     private int endTime;
     private String mode;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "route_id")
     private List<RouteAction> actions; // Actions along the route
-
-    // Getters and setters
 }
