@@ -13,19 +13,24 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Issue {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long userId;  // User reporting the issue
-    private Long binId;   // Bin related to the issue
+    @Column(nullable = false)
     private String description;
 
+    @Column(nullable = false)
+    private Long userId;  // Stores the user ID fetched from the User service
+
+    @Column(nullable = false)
+    private Long binId;   // Stores the bin ID fetched from the Bin service
+
     @Enumerated(EnumType.STRING)
-    private IssueStatus status;  // REPORTED, RESOLVED
+    private IssueStatus status = IssueStatus.PENDING;  // Issue status (e.g., PENDING, RESOLVED)
 
-    private LocalDateTime reportedAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
+
     private LocalDateTime resolvedAt;
-
-    // Getters and setters
 }

@@ -10,5 +10,10 @@ import java.util.List;
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
     List<Issue> findByBinIdAndStatus(Long binId, IssueStatus status);
+
+    List<Issue> findByStatus(IssueStatus issueStatus);
+
+    List<Issue> findBySenderId(Long userId);
+
 }
 
