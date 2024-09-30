@@ -13,8 +13,8 @@
         <module name="collectionLog" />
         <module name="Discovery-Service" />
         <module name="issues" />
-        <module name="users" />
         <module name="notifications" />
+        <module name="users" />
       </profile>
     </annotationProcessing>
   </component>
