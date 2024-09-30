@@ -5,9 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@FeignClient(name = "bin-service")
+@FeignClient(name = "BIN")
 public interface BinFeignClient {
 
-    @GetMapping("/{id}")
+    @GetMapping("/bins/{id}")
     BinDTO getBinById(@PathVariable("id") Long id);
 }
