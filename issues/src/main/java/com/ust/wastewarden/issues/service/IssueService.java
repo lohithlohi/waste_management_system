@@ -65,7 +65,7 @@ public class IssueService {
     }
 
     public List<Issue> getUserIssues(Long userId) {
-        return issueRepository.findBySenderId(userId);
+        return issueRepository.findByUserId(userId);
     }
 
 }

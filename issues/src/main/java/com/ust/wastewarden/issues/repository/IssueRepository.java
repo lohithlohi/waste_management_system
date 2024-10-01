@@ -13,7 +13,7 @@ public interface IssueRepository extends JpaRepository<Issue, Long> {
 
     List<Issue> findByStatus(IssueStatus issueStatus);
 
-    List<Issue> findBySenderId(Long userId);
+    List<Issue> findByUserId(Long userId);
 
 }
 
