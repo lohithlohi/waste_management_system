@@ -8,6 +8,7 @@ import com.ust.wastewarden.routes.model.*;
 import com.ust.wastewarden.routes.repository.RouteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,10 +63,47 @@ public class RouteService {
 //        return routeRepository.save(route);
 //    }
 
+    public List<Truck> truckLatLongUlta(List<Truck> trucks){
+        List<Truck> modTrucks = new ArrayList<>();
+        for(Truck truck : trucks) {
+            double slat = truck.getStartLatitude();
+            double slong = truck.getStartLongitude();
+            double elat = truck.getEndLatitude();
+            double elong = truck.getEndLongitude();
+
+            truck.setStartLatitude(slong);
+            truck.setStartLongitude(slat);
+            truck.setEndLatitude(elong);
+            truck.setEndLongitude(elat);
+
+            modTrucks.add(truck);
+        }
+        return modTrucks;
+    }
+
+    public List<Bin> binsLatLongUlta(List<Bin> bins){
+        List<Bin> modBins = new ArrayList<>();
+        for(Bin bin : bins) {
+            double lat = bin.getLatitude();
+            double lon = bin.getLongitude();
+
+            bin.setLatitude(lon);
+            bin.setLongitude(lat);
+
+            modBins.add(bin);
+        }
+        return modBins;
+    }
+
     // Assign routes based on bins (jobs) and available trucks (agents)
     public RouteResponse assignRoutes(List<Bin> bins) throws Exception {
+
         // Step 1: Fetch available trucks
         List<Truck> trucks = truckFeignClient.getAvailableTrucks();
+
+        // reversing lats and longs
+        trucks = truckLatLongUlta(trucks);
+        bins = binsLatLongUlta(bins);
 
         // Step 2: Build the route request using bins and trucks
         RouteRequest routeRequest = buildRouteRequest(bins, trucks);
